@@ -22,6 +22,21 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :tweetyodel_live, TweetyodelLiveWeb.Endpoint,
+  live_view: [
+    signing_salt: "8t9iELKemWWXPPIHdeqDHGBzKN/wBNXo"
+  ]
+
+config :phoenix,
+  template_engines: [leex: Phoenix.LiveView.Engine]
+
+config :tweetyodel_live, TweetyodelLiveWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r{lib/tweetyodel_live_web/live/.*(ex)$}
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

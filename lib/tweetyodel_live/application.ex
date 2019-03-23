@@ -9,9 +9,11 @@ defmodule TweetyodelLive.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      TweetyodelLiveWeb.Endpoint
-      # Starts a worker by calling: TweetyodelLive.Worker.start_link(arg)
-      # {TweetyodelLive.Worker, arg},
+      TweetyodelLiveWeb.Endpoint,
+      %{
+        id: Tweetyodel,
+        start: {Tweetyodel.Worker.Supervisor, :start_tweet, ["tweetyodel_live"]}
+      }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
