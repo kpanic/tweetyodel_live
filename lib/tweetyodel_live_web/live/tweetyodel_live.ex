@@ -26,12 +26,8 @@ defmodule TweetyodelLiveWeb.Tweetyodel do
   end
 
   def handle_event("search", %{"keyword" => search_keywords}, socket) do
-    IO.inspect("SEARCH")
-    IO.inspect(search_keywords)
-    Tweetyodel.Worker.stop_stream("tweetyodel_live") |> IO.inspect(label: "STOP")
-
+    Tweetyodel.Worker.stop_stream("tweetyodel_live")
     Tweetyodel.Worker.start_stream("tweetyodel_live", search_keywords)
-    |> IO.inspect(label: "START")
 
     {:noreply, refresh_stream(socket)}
   end
